@@ -10,18 +10,19 @@
     <p>Halaman ini bisa Anda tutup sekarang.</p>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbGwwsLR6Y8A8R3gKifmWXmL5ZxQF152RbZk1Rd6bNXj3x00L79LiFNDS_1GWq3cIa/exec";
+        const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScTQPJ8QNDWp9WrAmUayOJGVvmT73Ea9hUTyGseBoDMfykMlw/formResponse";
 
         const urlParams = new URLSearchParams(window.location.search);
         const namaPeternak = urlParams.get('nama') || 'Tanpa Nama';
 
         const formData = new FormData();
-        formData.append('nama', namaPeternak);
-        formData.append('userAgent', navigator.userAgent);
-        formData.append('screen', window.screen.width + "x" + window.screen.height);
+        formData.append('entry.510105707', namaPeternak);
+        formData.append('entry.909415257', navigator.userAgent);
+        formData.append('entry.1426780158', window.screen.width + "x" + window.screen.height);
 
-        fetch(SCRIPT_URL, {
+        fetch(FORM_URL, {
             method: "POST",
+            mode: "no-cors",
             body: formData
         });
     </script>
