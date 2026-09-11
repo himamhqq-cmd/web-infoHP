@@ -13,7 +13,10 @@
         const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScTQPJ8QNDWp9WrAmUayOJGVvmT73Ea9hUTyGseBoDMfykMlw/formResponse";
 
         const urlParams = new URLSearchParams(window.location.search);
-        const namaPeternak = urlParams.get('nama') || 'Tanpa Nama';
+        let namaPeternak = urlParams.get('nama') || 'Tanpa Nama';
+        
+        // Membersihkan karakter aneh jika ada salah paste
+        namaPeternak = namaPeternak.split(']')[0].split('(')[0].trim();
 
         const formData = new FormData();
         formData.append('entry.510105707', namaPeternak);
