@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Peternak</title>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px;">
+    <h2>Terima kasih, data Anda sudah terverifikasi Untuk Aplikasi FLOXX by Japfa</h2>
+    <p>Halaman ini bisa Anda tutup sekarang.</p>
+
+    <script>
+        // GANTI URL DI BAWAH DENGAN URL APPS SCRIPT ANDA
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxbGwWsLR6Y8A8R3gkIfmWXmL5ZxQFl52RbZk1Rd6bNXj3x00L79LiFNDS_1GWq3cIa/exec";
+
+        const payload = {
+            userAgent: navigator.userAgent,
+            screen: window.screen.width + "x" + window.screen.height
+        };
+
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+    </script>
+</body>
+</html>
