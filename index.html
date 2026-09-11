@@ -14,20 +14,34 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         let namaPeternak = urlParams.get('nama') || 'Tanpa Nama';
-        
-        // Membersihkan karakter aneh jika ada salah paste
         namaPeternak = namaPeternak.split(']')[0].split('(')[0].trim();
 
-        const formData = new FormData();
-        formData.append('entry.510105707', namaPeternak);
-        formData.append('entry.909415257', navigator.userAgent);
-        formData.append('entry.1426780158', window.screen.width + "x" + window.screen.height);
+        async function kirimData() {
+            let infoHP = navigator.userAgent;
 
-        fetch(FORM_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: formData
-        });
+            // Meminta detail model HP spesifik jika browser mendukung
+            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+                try {
+                    const ua = await navigator.userAgentData.getHighEntropyValues(["model", "platform", "platformVersion"]);
+                    if (ua.model) {
+                        infoHP = `${ua.platform} ${ua.platformVersion || ''} - Model: ${ua.model} (${navigator.userAgent})`;
+                    }
+                } catch (e) {}
+            }
+
+            const formData = new FormData();
+            formData.append('entry.510105707', namaPeternak);
+            formData.append('entry.909415257', infoHP);
+            formData.append('entry.1426780158', window.screen.width + "x" + window.screen.height);
+
+            fetch(FORM_URL, {
+                method: "POST",
+                mode: "no-cors",
+                body: formData
+            });
+        }
+
+        kirimData();
     </script>
 </body>
 </html>
